@@ -1,14 +1,23 @@
-@import "./scss/variables.scss";
+
 html {
   font-size: 10px;
+  width: 100vw;
+  height: 100vh;
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
-  color: $text-color;
+  color: #FF961F;
 }
+
+
+@import "./scss/variables.scss";
+@import "./scss/header.scss";
+@import "./scss/signup.scss";
