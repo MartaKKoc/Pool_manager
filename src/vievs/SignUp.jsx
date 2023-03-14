@@ -1,13 +1,17 @@
 import {useState} from 'react';
-// import { InputText } from 'primereact/inputtext';
-// import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
-// import { Toast } from 'primereact/toast';
+
 import {supabase} from "../services/supabase.js";
+
+// tosty
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
-
+const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name:'', email:'', password:''
     })
@@ -21,21 +25,59 @@ const SignUp = () => {
             }
         })
     }
-async function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
-        try {
 
+
+        try {
             const { data, error } = await supabase.auth.signUp({
                 email: formData.email,
                 password: formData.password,
+                options: {
+                    data: {
+                        full_name: formData.name,
+                    }
+                }
             })
-        alert('Check you email for veryfication link')
+            console.log(data,error);
+            if (error) {
+                toast.error(error.message)
+            }
+            if (data.user) {
+                toast.success("Success")
+                navigate('/');
+            }
         } catch (error) {
             alert(error)
         }
+    }
+
+    const handleAccount = () => {
+        navigate('/SignIn')
+    }
+
+const notify = () => {
+    toast.success('Wow so easy!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
+    toast.error('It is not that easy!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
 }
-
-
 
     return (
         <div className='signup-container'>
@@ -44,9 +86,9 @@ async function handleSubmit(e){
                     <h1><i className="pi pi-user"></i>SignUp</h1>
                     <form className='signup-form' onSubmit={handleSubmit}>
                         <input
-                        placeholder="Name"
-                        name="name"
-                        onChange={handleChange}
+                            placeholder="Fullname"
+                            name="fullname"
+                            onChange={handleChange}
                         />
 
                         <input
@@ -62,8 +104,9 @@ async function handleSubmit(e){
                             onChange={handleChange}
                         />
 
-                        <Button label="SignUp" severity="info" outlined />
-                        <Button label="Already have an account?" severity="info" text />
+                        <Button label="SignUp" type={"submit"} severity="info" outlined />
+                        <Button label="Already have an account?" severity="info" text onClick={handleAccount} />
+                        <ToastContainer className="tost"/>
                     </form>
                 </div>
             </div>
@@ -73,3 +116,4 @@ async function handleSubmit(e){
 }
 
 export { SignUp };
+
