@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {supabase} from "../services/supabase.js";
 
 function AddUser() {
+    const [show, setShow] = useState(false);
+
     const [users, setUsers] = useState([]);
 
     const [name, setName] = useState('');
@@ -9,17 +11,32 @@ function AddUser() {
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
 
+    useEffect(() => {
+        addUser()
+    }, [])
+
     const addUser = async (event) => {
-        event.preventDefault();
+ try {
         const {data, error} = await supabase
             .from("users")
-            .insert({name, surname, age, phone })
+            .insert({name: name,
+                surname: surname,
+                age: age,
+                phone: phone
+            })
         if (error) {
             console.log(error);
         }
         else {
-            console.log("Dodano użytkownika do bazy danych");
+            // window.location.reload();
+            if (data !== null){
+                addUsers(data)
+            }
         }
+ }
+ catch (error) {
+     alert(error.message)
+ }
         setUsers([...users, { name, surname, age, phone }]);
         setName('');
         setSurname('');
@@ -27,13 +44,29 @@ function AddUser() {
         setPhone('');
         }
 
+    const getUser = async (event) => {
+        try {
+            const {data, error} = await supabase
+                .from("users")
+                .select("*")
+            if (error) {
+                console.log(error);
+            } else {
 
-
+                if (data !== null) {
+                    getUsers(data)
+                }
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
     return (
-        <div>
-
-                <div>
+        <div className="form-container">
+            {show === false ?
+            <>
+                <div className="input-container">
                     <label>Imię:</label>
                     <input
                         type="text"
@@ -62,18 +95,26 @@ function AddUser() {
                         onChange={(e) => setPhone(e.target.value)}
                     />
                     <br />
-                    <button onClick={addUser}>Zapisz</button>
+                    <button className="save-button" onClick={addUser}>Zapisz</button>
+
+                    <button className="show-button" onClick={() => setShow(true)}>Pokaż listę</button>
                 </div>
-            }
-            <ul>
+            </>
+                :
+<>
+    <button className="show-button" onClick={() => setShow(false)}>Wróć</button>
+            <ol>
                 {users.map((user, index) => (
                     <li key={index}>
                         {user.name} {user.surname}, {user.age} {user.phone}
                     </li>
                 ))}
-            </ul>
+            </ol>
+</>
+            }
         </div>
     );
+
 }
 
 export { AddUser }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddUser} from "./AddUser.jsx";
+import { AddUser } from "./AddUser.jsx";
 
 
 const Pulpit = () => {
@@ -30,35 +30,25 @@ const Pulpit = () => {
             <div className="container-water">
                 <div className="container-box">
             <div className="groups-container">
-                <h2>Grupa 1</h2>
-                {showList && (
-                    <ul>
-                        {users.map((user, index) => (
-                            <li key={index}>
-                                {user.name} {user.surname} {user.age} {user.phone}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                <button onClick={handleClick}>Dodaj użytkownika</button>
-                {showAddUser && <AddUser />}
+                <h2>Grupa&nbsp;1</h2>
+                <AddUser></AddUser>
             </div>
 
             <div className="groups-container">
-                <h2>Grupa 2</h2>
+                <h2>Grupa&nbsp;2</h2>
                 <button>Informacje</button>
                 <button>CheckList</button>
             </div>
                 </div>
                 <div className="container-box">
             <div className="groups-container">
-                <h2>Grupa 3</h2>
+                <h2>Grupa&nbsp;3</h2>
                 <button>Informacje</button>
                 <button>CheckList</button>
             </div>
 
             <div className="groups-container">
-                <h2>Grupa 4</h2>
+                <h2>Grupa&nbsp;4</h2>
                 <button>Informacje</button>
                 <button>CheckList</button>
             </div>

@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-family: 'Barlow', sans-serif;
+  div.row {
+    margin-bottom: 15px;
+    div.cart-body {
+      display: flex;
+    }
+  input {
+    margin: 10px auto;
+    padding: 5px;
+  }
+  }
+  div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      padding: 5px;
+
+    }
+  }
+
+}

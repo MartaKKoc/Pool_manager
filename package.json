@@ -11,10 +11,12 @@
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
     "@supabase/supabase-js": "^2.10.0",
+    "bootstrap": "^5.2.3",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^9.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.1.1",

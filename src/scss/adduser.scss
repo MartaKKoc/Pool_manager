@@ -1,0 +1,23 @@
+.form-container {
+  font-size: 1.4rem;
+  font-family: 'Barlow', sans-serif;
+  color: black;
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    label {
+      margin: 1px 30px;
+    }
+    input {
+      margin: 0 30px;
+      padding: 5px;
+    }
+  }
+  ol {
+
+    margin: 0 30px 20px;
+  }
+}
+

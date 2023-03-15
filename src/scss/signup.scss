@@ -8,13 +8,11 @@
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
   margin: 0 auto;
   padding: 0;
 
   .signup-container-water {
     width: 80%;
-    height: 80%;
     background: rgb(26,41,68);
     background: linear-gradient(50deg, rgba(26,41,68,1) 10%, rgba(64,168,142,1) 44%, rgba(7,103,153,1) 100%);
     margin-top: 30px;
