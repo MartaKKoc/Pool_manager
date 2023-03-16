@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {supabase} from "../services/supabase.js";
+import {UserList} from "./UserList.jsx";
+
 
 function AddUser() {
-    const [show, setShow] = useState(false);
+    const [showList, setShowList] = useState(false);
 
     const [users, setUsers] = useState([]);
 
@@ -11,11 +13,12 @@ function AddUser() {
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
 
+
     useEffect(() => {
         addUser()
     }, [])
 
-    const addUser = async (event) => {
+    const addUser = async () => {
  try {
         const {data, error} = await supabase
             .from("users")
@@ -28,9 +31,8 @@ function AddUser() {
             console.log(error);
         }
         else {
-            // window.location.reload();
             if (data !== null){
-                addUsers(data)
+                addUser(data)
             }
         }
  }
@@ -44,27 +46,9 @@ function AddUser() {
         setPhone('');
         }
 
-    const getUser = async (event) => {
-        try {
-            const {data, error} = await supabase
-                .from("users")
-                .select("*")
-            if (error) {
-                console.log(error);
-            } else {
-
-                if (data !== null) {
-                    getUsers(data)
-                }
-            }
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
     return (
         <div className="form-container">
-            {show === false ?
+            {showList === false ?
             <>
                 <div className="input-container">
                     <label>Imię:</label>
@@ -97,19 +81,13 @@ function AddUser() {
                     <br />
                     <button className="save-button" onClick={addUser}>Zapisz</button>
 
-                    <button className="show-button" onClick={() => setShow(true)}>Pokaż listę</button>
+                    <button className="show-button" onClick={() => setShowList(true)}>Pokaż listę</button>
                 </div>
             </>
                 :
 <>
-    <button className="show-button" onClick={() => setShow(false)}>Wróć</button>
-            <ol>
-                {users.map((user, index) => (
-                    <li key={index}>
-                        {user.name} {user.surname}, {user.age} {user.phone}
-                    </li>
-                ))}
-            </ol>
+    <button className="show-button" onClick={() => setShowList(false)}>Wróć</button>
+            <UserList></UserList>
 </>
             }
         </div>

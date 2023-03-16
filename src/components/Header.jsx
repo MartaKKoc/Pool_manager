@@ -63,7 +63,7 @@ const Header = () => {
         <div className="header">
             <h1>POOL Manager</h1>
             <div className="user-profile">
-                <Avatar onClick={(e) => menu.current.toggle(e)} label="P" size="xlarge" />
+                <Avatar onClick={(e) => menu.current.toggle(e)} label="Wyloguj" size="xlarge" />
                 <Menu model={menuItems} popup ref={menu} />
             </div>
         </div>

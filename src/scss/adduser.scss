@@ -14,10 +14,14 @@
       margin: 0 30px;
       padding: 5px;
     }
+
   }
   ol {
-
     margin: 0 30px 20px;
+    .delete {
+      padding: 0 50px;
+      border: 1px solid red;
+    }
   }
 }
 
